@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from '../logo.svg';
 import { Link, Button, Colors } from 'react-foundation';
+import { Todos } from './todos/Todos';
 
 export class Home extends React.Component { 
     constructor(props) { 
@@ -22,6 +23,12 @@ export class Home extends React.Component {
                 <Link>View All Features</Link>
                 <Button color={Colors.SUCCESS}>Save</Button>
                 <Button color={Colors.ALERT}>Delete</Button>
+                </div>
+                <div className="row">
+                    <div className="columns">
+                        <h1>Todo App</h1>
+                        <Todos />
+                    </div>
                 </div>
                 {this.props.children}
             </div>

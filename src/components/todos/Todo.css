@@ -1,0 +1,7 @@
+.todo-striked{
+    text-decoration: line-through;
+}
+
+li {
+    text-align: left;
+}
