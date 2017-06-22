@@ -31,7 +31,7 @@ export class Todo extends React.Component{
             <div className="columns text-left">
                 <input type="checkbox" onChange={()=>{}} checked={todo.isCompleted} ref="isCompleted" /> 
                 
-                <p><span className={striked}>{todo.todo}</span>
+                <p><span className={striked}>{todo.todo}</span> <br/>
                 <span>{renderDate()}</span></p>
             </div>
         </div>

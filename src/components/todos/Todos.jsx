@@ -6,8 +6,16 @@ import { TodoList } from './TodoList';
 import { AddTodo } from './AddTodo';
 import { TodoFilter } from './TodoFilter';
 
+var actions = require('../../actions/actions');
+var store = require('../../store/configureStore').configure();
 
 var todosApi = require('../../api/TodoAPi');
+
+store.subscribe(()=>{
+    console.log(store.getState());
+});
+
+store.dispatch(actions.addTodo('go home now.'));
 
 export class Todos extends React.Component {
     constructor(props) {
