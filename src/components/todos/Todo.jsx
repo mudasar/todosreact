@@ -1,5 +1,6 @@
 import React from 'react';
 import './Todo.css';
+import moment from 'moment';
 
 export class Todo extends React.Component{
     constructor(props){
@@ -19,10 +20,19 @@ export class Todo extends React.Component{
         striked = "todo-striked";
     }
 //defaultChecked={todo.isCompleted}
+    var renderDate = () => {
+        var mesasge = 'Created ';
+        var timestamp = todo.createdAt;
+
+        return mesasge + moment.unix(timestamp).format('MMM Do YYYY @ h:mm a');
+    }
     return (
         <div className="row" onClick={this.onTodoCompleted}>
             <div className="columns text-left">
-                <input type="checkbox" onChange={()=>{}} checked={todo.isCompleted} ref="isCompleted" /> <label className={striked}>{todo.todo}</label>
+                <input type="checkbox" onChange={()=>{}} checked={todo.isCompleted} ref="isCompleted" /> 
+                
+                <p><span className={striked}>{todo.todo}</span>
+                <span>{renderDate()}</span></p>
             </div>
         </div>
     )

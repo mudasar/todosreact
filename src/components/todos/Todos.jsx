@@ -1,5 +1,6 @@
 import React from 'react'
 import uuid from 'node-uuid';
+import moment from 'moment';
 
 import { TodoList } from './TodoList';
 import { AddTodo } from './AddTodo';
@@ -52,7 +53,12 @@ export class Todos extends React.Component {
     }
 
     handleAddTodo(todo){
-        let newTodo = {todo:todo, isCompleted: false, id: uuid()};
+        let newTodo = {
+            todo:todo,
+            isCompleted: false,
+            id: uuid(),
+            createdAt: moment().unix()
+        };
         var todos = this.state.todos;
         this.setState((prevState, props) => ({
             todos : [... this.state.todos,newTodo]

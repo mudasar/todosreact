@@ -1,5 +1,5 @@
 var $ = require('jquery');
-
+var localStorage = window.localStorage ? window.localStorage : { getItem: (val)=> {return [];}, setItem: (key, val) => {} };
 module.exports = {
     setTodos: function(todos){
         if ($.isArray(todos)) {
