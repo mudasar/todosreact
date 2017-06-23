@@ -1,27 +1,33 @@
 import React from 'react'
+import {connect} from 'react-redux';
+var actions = require('../../actions/actions');
 
-export class TodoFilter extends React.Component {
+class TodoFilter extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleSearch = this.handleSearch.bind(this);
     }
 
-    handleSearch(e){
-        //e.preventDefault();
-        var showCompleted = this.refs.completed.checked;
-        var searchText =this.refs.search.value;
-       this.props.onSearch(showCompleted, searchText);
-    }
 
     render() {
+
+        var {dispatch, showCompleted, searchText} = this.props;
+
         return (
             <div>
                 <div className="row">
                     <div className="shrink large-11 medium-11 small-12 large-centered column">
                         <form>
                             <div className="row">
-                                <input type="text" ref="search" placeholder="Search todos" onChange={this.handleSearch} />
+                                <input
+                                    type="text"
+                                    ref="search"
+                                    placeholder="Search todos"
+                                    value={searchText}
+                                    onChange={(e) => {
+                                    var searchText = this.refs.search.value;
+                                    dispatch(actions.setSearchText(searchText));
+                                }}/>
                             </div>
                         </form>
                     </div>
@@ -31,7 +37,14 @@ export class TodoFilter extends React.Component {
                         <input
                             className="input"
                             ref="completed"
-                            id="completed" onChange={this.handleSearch}
+                            checked={showCompleted}
+                            id="completed"
+                            onChange={(e) => {
+                            var showCompleted = this.refs.completed.checked;
+                            this
+                                .props
+                                .dispatch(actions.toggleShowCompleted(showCompleted));
+                        }}
                             type="checkbox"
                             name="completed"/>
                         <label htmlFor="completed">Show completed todos</label>
@@ -43,4 +56,7 @@ export class TodoFilter extends React.Component {
     }
 }
 
-export default TodoFilter;
+export default connect((state, ownProps) => {
+    return {showCompleted: state.showCompleted, searchText: state.searchText};
+
+})(TodoFilter);

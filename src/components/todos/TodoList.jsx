@@ -1,22 +1,25 @@
-import React from 'react'
-import {Todo} from './Todo';
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-export class TodoList extends React.Component {
+
+import Todo from './Todo';
+import TodoApi from '../../api/TodoAPi';
+
+class TodoList extends Component {
     constructor(props) {
         super(props);
     }
 
-    
-
     render() {
-        const todos = this.props.todos;
-        const that = this;
+        const {todos, showCompleted, searchText} = this.props;
+        console.log(this.props);
+        
         function mapTodos() {
-            if (todos.length > 0) {
-                var todoList = todos.map((todo) => <Todo key={todo.id} todo={todo} onTodoCompleted={that.props.onToggle}/>);
+            if (todos && todos.length > 0) {
+                var todoList = TodoApi.filterTodos(todos, showCompleted, searchText).map((todo) => <Todo key={todo.id} todo={todo} />);
                 return todoList
             } else {
-                return <p>No todos found.</p>
+                return <p>Nothing To Do.</p>
             }
         }
 
@@ -31,4 +34,11 @@ export class TodoList extends React.Component {
 
 }
 
-export default TodoList;
+const mapStateToProps = (state, ownProps) => {
+//   console.log(state); // state
+//   console.log(ownProps); // ownProps
+    return state;
+};
+
+
+export default connect(mapStateToProps)(TodoList);
