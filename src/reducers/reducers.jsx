@@ -38,6 +38,8 @@ export const todoRecuder = (state = todoRecuderInitialState, action) => {
                     return todo;
                 });
              return todos;
+        case 'ADD_TODOS':
+            return [...state,...action.todos];
         default:
             return state
     }

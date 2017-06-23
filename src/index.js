@@ -10,16 +10,22 @@ import registerServiceWorker from './registerServiceWorker';
 import '../node_modules/foundation-sites/dist/css/foundation.min.css';
 import './index.css';
 
+import TodoApi from './api/TodoAPi';
+import './playground/firebaseplay';
+
 var store = require('./store/configureStore').configure();
 var actions = require('./actions/actions');
 
+
+
 store.subscribe(()=>{
-    console.log(store.getState());
+    var state = store.getState();
+    TodoApi.setTodos(state.todos);
+    console.log(state);
 });
 
-store.dispatch(actions.addTodo('hi'));
-store.dispatch(actions.addTodo('hello'));
-store.dispatch(actions.addTodo('these'));
+var initialTodos = TodoApi.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 ReactDOM.render(
     <Provider store={store} >

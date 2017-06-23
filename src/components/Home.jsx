@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../logo.svg';
 import { Link, Button, Colors } from 'react-foundation';
-import { Todos } from './todos/Todos';
+import Todos  from './todos/Todos';
 
 export class Home extends React.Component { 
     constructor(props) { 

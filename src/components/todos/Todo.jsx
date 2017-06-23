@@ -38,12 +38,15 @@ class Todo extends React.Component {
         }
         return (
             <div className="row" onClick={ (e) => {this.props.dispatch(actions.toggleTodo(this.props.todo.id))}}>
-                <div className="columns text-left">
-                    <p><input
+                <div className=" large-1 columns text-center">
+<input
                         type="checkbox"
                         onChange={() => {}}
                         checked={todo.isCompleted}
                         ref="isCompleted"/>
+                    </div>
+                    <div className=" large-11 columns text-left">
+                    <p>
                         <span className={striked}>{todo.todo}</span>
                         <br/>
                         <span className="chkpanel">{renderDate()}</span>
