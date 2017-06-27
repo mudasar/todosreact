@@ -7,47 +7,43 @@ var actions = require('../../actions/actions');
 class Todo extends React.Component {
     constructor(props) {
         super(props);
-
-        // this.onTodoCompleted = this
-        //     .onTodoCompleted
-        //     .bind(this);
     }
 
-    // onTodoCompleted(e) {
-    //     //this.props.onTodoCompleted(this.props.todo.id);
-    //     this
-    //         .props
-    //         .dispatch(actions.toggleTodo(this.props.todo.id));
-    // }
-
     render() {
-        const todo = this.props.todo;
+        
+        var { text, id, completedAt, isCompleted, createdAt, toggleTodo } = this.props;
 
         let striked = "";
-        if (todo.isCompleted) {
+        if (isCompleted) {
             striked = "todo-striked";
         }
         //defaultChecked={todo.isCompleted}
         var renderDate = () => {
             var mesasge = 'Created ';
-            var timestamp = todo.createdAt;
+            var timestamp = createdAt;
 
             return mesasge + moment
                 .unix(timestamp)
                 .format('MMM Do YYYY @ h:mm a');
         }
         return (
-            <div className="row" onClick={ (e) => {this.props.dispatch(actions.toggleTodo(this.props.todo.id))}}>
+            
+            <div
+                className="row"
+                onClick={(e) => {
+                    e.preventDefault();
+                    toggleTodo(id, !isCompleted);
+            }}>
                 <div className=" large-1 columns text-center">
-<input
+                    <input
                         type="checkbox"
                         onChange={() => {}}
-                        checked={todo.isCompleted}
+                        checked={isCompleted}
                         ref="isCompleted"/>
-                    </div>
-                    <div className=" large-11 columns text-left">
+                </div>
+                <div className=" large-11 columns text-left">
                     <p>
-                        <span className={striked}>{todo.todo}</span>
+                        <span className={striked}>{text}</span>
                         <br/>
                         <span className="chkpanel">{renderDate()}</span>
                     </p>
@@ -57,13 +53,15 @@ class Todo extends React.Component {
     }
 }
 
-
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        toggleTodo: (id) => {
-            dispatch(actions.toggleTodo(id))
+        toggleTodo: (id, isCompleted) => {
+            dispatch(actions.startUpdateTodo(id, isCompleted))
         }
     }
+};
+const mapStateToProps = (state, ownProps) => {
+    return state;
 }
 
-export default connect()(Todo);
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);

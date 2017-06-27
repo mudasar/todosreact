@@ -16,7 +16,7 @@ class TodoList extends Component {
         
         function mapTodos() {
             if (todos && todos.length > 0) {
-                var todoList = TodoApi.filterTodos(todos, showCompleted, searchText).map((todo) => <Todo key={todo.id} todo={todo} />);
+                var todoList = TodoApi.filterTodos(todos, showCompleted, searchText).map((todo) => <Todo key={todo.id} {...todo} />);
                 return todoList
             } else {
                 return <p>Nothing To Do.</p>

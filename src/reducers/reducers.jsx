@@ -25,15 +25,11 @@ const todoRecuderInitialState = [];
 export const todoRecuder = (state = todoRecuderInitialState, action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            return [...state, { todo:action.text,
-            isCompleted: false,
-            id: uuid(),
-            createdAt: moment().unix()}];
-        case 'TOGGLE_TODO':
+            return [...state, action.todo];
+        case 'UPDATE_TODO':
                 var todos = state.map( (todo) => {
                     if (todo.id === action.id) {
-                        var nextCompleted = !todo.isCompleted;
-                        return {...todo, isCompleted: nextCompleted, completedAt: nextCompleted ? moment().unix() : undefined};
+                        return {...todo, ...action.updates};
                     }
                     return todo;
                 });

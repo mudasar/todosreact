@@ -14,7 +14,7 @@ class AddTodo extends React.Component {
         
         const todo = this.refs.todo.value;
         if (todo.length > 0) {
-             this.props.dispatch(actions.addTodo(todo));
+             this.props.dispatch(actions.startAddTodo(todo));
             this.refs.todo.value = '';
         }else{
             this.refs.todo.focus();

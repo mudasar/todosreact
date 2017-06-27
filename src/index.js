@@ -11,7 +11,8 @@ import '../node_modules/foundation-sites/dist/css/foundation.min.css';
 import './index.css';
 
 import TodoApi from './api/TodoAPi';
-import './playground/firebaseplay';
+
+import firebase, {firebaseRef} from './firebase';
 
 var store = require('./store/configureStore').configure();
 var actions = require('./actions/actions');
@@ -20,12 +21,14 @@ var actions = require('./actions/actions');
 
 store.subscribe(()=>{
     var state = store.getState();
-    TodoApi.setTodos(state.todos);
+    //TodoApi.setTodos(state.todos);
     console.log(state);
 });
 
-var initialTodos = TodoApi.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
+
+store.dispatch(actions.startAddTodos());
+
+
 
 ReactDOM.render(
     <Provider store={store} >

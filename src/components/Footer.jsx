@@ -5,7 +5,7 @@ export const Footer = (props) => {
     return(
         <div>
             <p>Footer</p>
-            <Test />
+            {/*<Test />*/}
               {/*<Test />
                 <Test />
                   <Test />

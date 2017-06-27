@@ -10,7 +10,7 @@ export const Header = (props) => {
                     <ul className="dropdown menu" data-dropdown-menu>
                         <li className="menu-text">Todo App</li>
                         <li>
-                            <NavLink exact to="/" activeClassName="button" >Home</NavLink>
+                            <NavLink exact to="/todos" activeClassName="button" >Home</NavLink>
                         </li>
                         <li>
                             <NavLink to="/contact" activeClassName="button">Contact</NavLink>
@@ -18,14 +18,18 @@ export const Header = (props) => {
                         <li>
                             <NavLink to="/about" activeClassName="button">About</NavLink>
                         </li>
+                        
                     </ul>
                 </div>
                 <div className="top-bar-right">
                     <ul className="menu">
-                        <li><input type="search" placeholder="Search"/></li>
+                        <li>
+                            <NavLink to="/logout" activeClassName="success" className="button">Logout</NavLink>
+                        </li>
+                        {/*<li><input type="search" placeholder="Search"/></li>
                         <li>
                             <button type="button" className="button">Search</button>
-                        </li>
+                        </li>*/}
                     </ul>
                 </div>
             </div>

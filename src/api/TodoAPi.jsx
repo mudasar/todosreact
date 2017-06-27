@@ -32,7 +32,7 @@ module.exports = {
         //Filter by SearchText
         filteredTodos = filteredTodos.filter( (todo) => {
             if (searchText.length > 0) {
-                return todo.todo.indexOf(searchText.toLowerCase()) > -1;    
+                return todo.text.indexOf(searchText.toLowerCase()) > -1;    
             }
             return true;
             
