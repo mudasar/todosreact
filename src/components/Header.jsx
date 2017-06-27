@@ -1,8 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import {connect} from 'react-redux';
+var actions = require('../actions/actions');
 
+const Header = (props) => {
 
-export const Header = (props) => {
     return (
         <div>
             <div className="top-bar">
@@ -24,7 +26,8 @@ export const Header = (props) => {
                 <div className="top-bar-right">
                     <ul className="menu">
                         <li>
-                            <NavLink to="/logout" activeClassName="success" className="button">Logout</NavLink>
+                            <button onClick={(e) => {e.preventDefault();
+                                 props.handleLogout();}} className="button">Logout</button>
                         </li>
                         {/*<li><input type="search" placeholder="Search"/></li>
                         <li>
@@ -38,4 +41,16 @@ export const Header = (props) => {
     )
 }
 
-export default Header;
+const mapStateToProps = (state, ownProps) => {
+    return state;
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        handleLogout: () => {
+            dispatch(actions.startLogout());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

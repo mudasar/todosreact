@@ -28,7 +28,13 @@ store.subscribe(()=>{
 
 store.dispatch(actions.startAddTodos());
 
-
+firebase.auth().onAuthStateChanged( (user) => {
+    if (user) {
+        
+    }else{
+        
+    }
+});
 
 ReactDOM.render(
     <Provider store={store} >

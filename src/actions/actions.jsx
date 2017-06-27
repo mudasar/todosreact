@@ -73,9 +73,17 @@ export var startAddTodos = () => {
 };
 
 export var startLogin = () => {
-    return (dispatch, getStae) => {};
+    return (dispatch, getStae) => {
+        return firebase.auth().signInWithPopup(githubProvider).then( (result) => {
+            console.log('Auth worked', result);
+        }, (err)=>{
+            console.log('Auth Fialed', err);
+        });
+    };
 };
 
 export var startLogout = () => {
-    return (dispatch, getStae) => {};
+    return (dispatch, getStae) => {
+        return firebase.auth().signOut().then( () => {console.log('Logged out');});
+    };
 };

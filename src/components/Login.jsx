@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+var actions = require('../actions/actions');
 
 class Login extends Component {
     render () {
+        var { handleLoginClick } = this.props;
         return (
             <div>
                 <h1 className="pae-title">Todo App</h1>
@@ -11,7 +14,10 @@ class Login extends Component {
                             <h3>Login</h3>
                             <p>Some information about login </p>
                             <p>Login with github account</p>
-                            <button className="button">Login with GitHub</button>
+                            <button className="button" onClick={(e) => {
+                                    e.preventDefault();
+                                    handleLoginClick();
+                                }}>Login with GitHub</button>
                         </div>
                     </div>
                 </div>
@@ -20,4 +26,18 @@ class Login extends Component {
     }
 }
 
-export default Login;
+
+const mapStateToProps = (state, ownProps) => {
+    return state;
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        handleLoginClick: () => {
+            dispatch(actions.startLogin());
+        }
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
